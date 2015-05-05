@@ -27,7 +27,7 @@ var letters = ['a','b','c','d','e','f','g','h','i','j'];
 //then tests the guess and checks against oponent
 // and changes boards accordingly
 //guess is lowercase letter followed by number (0-9)
-turns = 1;
+turns = 0;
 function userGuess(guess){
   var row = letters.indexOf(guess.charAt(0));
   var column = guess.charAt(1);
@@ -73,14 +73,16 @@ function userGuess(guess){
 
 
 //Board set up
-//only one ship of three length to 3
-//['3'] is piece name
-//wasd for direction startPos as lower case letter followed by number
+//ship of three length to 3
+//'3' is piece name
+//w-a-s-d for direction startPos as lower case letter followed by number(0-9)
 var directions = ['w','a','s','d'];
+
+
 function player1SetUp(startPos,direction){
   if (directions.indexOf(direction)===-1){
     console.log(" Not a valid direction");
-    return Player1SetUp;
+    return player1SetUp;
   }
   else{
     var row = letters.indexOf(startPos.charAt(0));
@@ -151,11 +153,85 @@ function player1SetUp(startPos,direction){
 }
 
 
+//Player 2 set up
+function player2SetUp(startPos,direction){
+  if (directions.indexOf(direction)===-1){
+    console.log(" Not a valid direction");
+    return player1SetUp;
+  }
+  else{
+    var row = letters.indexOf(startPos.charAt(0));
+    var column = startPos.charAt(1);
+    switch(direction){
+      case 'w':
+        if (row < 2){
+          console.log(" Not a valid direction");
+          return player2SetUp;
+        }
+        else if(player2PieceBoard[row][column]===' '&&player2PieceBoard[row-1][column]===' '&&player2PieceBoard[row-2][column]===' '){
+          player2PieceBoard[row][column] = '3';
+          player2PieceBoard[row-1][column] = '3';
+          player2PieceBoard[row-2][column] = '3';
+        }
+        else{
+          console.log( "there is something already there");
+          return player2SetUp;
+        }
+        break;
+      case 'a':
+        if (column < 2){
+          console.log(" Not a valid direction");
+          return player2SetUp;
+        }
+        else if(player2PieceBoard[row][column]===' '&&player2PieceBoard[row][column-1]===' '&&player2PieceBoard[row][column-2]===' '){
+          player2PieceBoard[row][column] = '3';
+          player2PieceBoard[row][column-1] = '3';
+          player2PieceBoard[row][column-2] = '3';
+        }
+        else{
+          console.log( "there is something already there");
+          return player2SetUp;
+        }
+        break;
+      case 's':
+        if (row > 7){
+          console.log(" Not a valid direction");
+          return player2SetUp;
+        }
+        else if(player2PieceBoard[row][column]===' '&&player2PieceBoard[row+1][column]===' '&&player2PieceBoard[row+2][column]===' '){
+          player2PieceBoard[row][column] = '3';
+          player2PieceBoard[row+1][column] = '3';
+          player2PieceBoard[row+2][column] = '3';
+        }
+        else{
+          console.log( "there is something already there");
+          return player2SetUp;
+        }
+        break;
+      case 'd':
+        if (column > 7){
+          console.log(" Not a valid direction");
+          return player2SetUp;
+        }
+        else if(player2PieceBoard[row][column]===' '&&player2PieceBoard[row][column+1]===' '&&player2PieceBoard[row][column+2]===' '){
+          player2PieceBoard[row][column] = '3';
+          player2PieceBoard[row][column+1] = '3';
+          player2PieceBoard[row][column+2] = '3';
+        }
+        else{
+          console.log( "there is something already there");
+          return player2SetUp;
+        }
+        break;
+    }
+  }
+}
+
 // <<<TESTING>>>
-player1SetUp('a3','a');
-player1SetUp('h9', 's');
-console.log(player1PieceBoard);
+player2SetUp('a3','a');
+player2SetUp('h9', 's');
+console.log(player2PieceBoard);
 userGuess('b3');
-console.log(player1PieceBoard);
+console.log(player2PieceBoard);
 
 
