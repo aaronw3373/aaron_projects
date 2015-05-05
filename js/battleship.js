@@ -71,13 +71,11 @@ function userGuess(guess){
   }
 }
 
-
 //Board set up
 //ship of three length to 3
 //'3' is piece name
 //w-a-s-d for direction startPos as lower case letter followed by number(0-9)
 var directions = ['w','a','s','d'];
-
 
 function player1SetUp(startPos,direction){
   if (directions.indexOf(direction)===-1){
@@ -152,7 +150,6 @@ function player1SetUp(startPos,direction){
   }
 }
 
-
 //Player 2 set up
 function player2SetUp(startPos,direction){
   if (directions.indexOf(direction)===-1){
@@ -226,6 +223,11 @@ function player2SetUp(startPos,direction){
     }
   }
 }
+
+//
+//next make winning conditions
+//
+
 
 // <<<TESTING>>>
 player2SetUp('a3','a');
