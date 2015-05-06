@@ -224,10 +224,43 @@ function player2SetUp(startPos,direction){
   }
 }
 
-//
-//next make winning conditions
-//
+//winning conditions
+function destroyedBoard(){
+  for (var row = 0; row < 10; row++) {
+    for (var column = 0; column < 10; column++) {
+      if (player1PieceBoard[row][column]===' '||player1PieceBoard[row][column]==='X'||player1PieceBoard[row][column]==='O'){
+        winner = true;
+        console.log("player 2 Wins");
+      }
+    }
+  }
+}
 
+function destroyedBoard(){
+  for (var row = 0; row < 10; row++) {
+    for (var column = 0; column < 10; column++) {
+      if (player2PieceBoard[row][column]===' '||player2PieceBoard[row][column]==='X'||player2PieceBoard[row][column]==='O'){
+        winner = true;
+        console.log("player 1 Wins");
+      }
+    }
+  }
+}
+
+$(document).ready(function(){
+  $()
+});
+
+
+//the game play
+var winner = false;
+function gamePlay(){
+  while (winner === false){
+
+  }
+}
+
+//gamePlay();
 
 // <<<TESTING>>>
 player2SetUp('a3','a');
