@@ -1,3 +1,8 @@
+body{
+  height:860px;
+  margin:auto;
+  max-width:1200px;
+}
 header{
   height:85px;
   background-color: red;
