@@ -1,0 +1,29 @@
+h1{
+  margin: 0 auto;
+  text-align:center;
+}
+section{
+  margin:0 auto;
+  height: 660px;
+  width: 660px;
+}
+div{
+  float: left;
+  height: 200px;
+  width: 200px;
+  background-color: green;
+  margin: 10px;
+  font-size: 180px;
+  text-align: center;
+  font-style:;
+
+}
+footer{
+  margin:0 auto;
+  text-align: center;
+  background-color: blue;
+}
+article{
+  width: 33%;
+  float:; left;
+}
