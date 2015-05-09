@@ -2,28 +2,25 @@ h1{
   margin: 0 auto;
   text-align:center;
 }
-section{
-  margin:0 auto;
-  height: 660px;
-  width: 660px;
+.container{
+  max-width:800px;
+  min-width: 600px
 }
-div{
-  float: left;
+.box{
+
   height: 200px;
-  width: 200px;
+  width: calc( 100% - 20px);
   background-color: green;
-  margin: 10px;
-  font-size: 180px;
+  margin:10px;
+  font-size: 10em;
   text-align: center;
   font-style:;
 
 }
-footer{
-  margin:0 auto;
-  text-align: center;
-  background-color: blue;
-}
-article{
-  width: 33%;
-  float:; left;
+#foot{
+  background-color: #009900;
+  padding: 10px;
+  margin-top: 20px;
+  font-size: 2em;
+
 }

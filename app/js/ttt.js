@@ -11,6 +11,8 @@ function turn(){
   var sumsX = [];
   var singleO = [];
   var sumsO = [];
+  var xscore = 0;
+  var yscore = 0;
 
 
 function win(local){
@@ -18,6 +20,8 @@ function win(local){
   if (user){
     for (var i = 0; i < sumsX.length; i++) {
       if (sumsX[i] + local === 15){
+        xscore++;
+        $('#xscore').html('X Score: ' + xscore);
         return true;
       }
     }
@@ -30,6 +34,8 @@ function win(local){
   } else {
       for (var k = 0; k < sumsO.length; k++) {
         if (sumsO[k] + local === 15){
+          yscore++;
+          $('#yscore').html('Y Score: ' + yscore);
           return true;
         }
       }

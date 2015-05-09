@@ -2,31 +2,57 @@
 <html>
 <head>
   <title>Tic Tac Toe</title>
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" type="text/css" href="styles/ttt.css">
 </head>
 <body>
-  <header>
-    <h1>Tic Tac Toe</h1>
-  </header>
-  <section>
-    <div id="4"></div>
-    <div id="9"></div>
-    <div id="2"></div>
-    <div id="3"></div>
-    <div id="5"></div>
-    <div id="7"></div>
-    <div id="8"></div>
-    <div id="1"></div>
-    <div id="6"></div>
-  </section>
+  <div class="container">
+   <h1>Tic Tac Toe</h1>
+    <div class="row">
+      <div class="col-xs-4 col-md-4">
+        <div class="box" id="4"></div>
+      </div>
+      <div class="col-xs-4 col-md-4">
+        <div class="box" id="9"></div>
+      </div>
+      <div class="col-xs-4 col-md-4">
+        <div class="box" id="2"></div>
+      </div>
+      <div class="col-xs-4 col-md-4">
+        <div class="box" id="3"></div>
+      </div>
+      <div class="col-xs-4 col-md-4">
+        <div class="box" id="5"></div>
+      </div>
+      <div class="col-xs-4 col-md-4">
+        <div class="box" id="7"></div>
+      </div>
+      <div class="col-xs-4 col-md-4">
+        <div class="box" id="8"></div>
+      </div>
+      <div class="col-xs-4 col-md-4">
+        <div class="box" id="1"></div>
+      </div>
+      <div class="col-xs-4 col-md-4">
+        <div class="box" id="6"></div>
+      </div>
+    </div>
+  </div>
 
-  <footer>
-    <article>X score:</article>
-    <article>O score:</article>
-    <article>Restart</article>
-  </footer>
+  <div class = "container" >
+    <div class= "row" id="foot">
+      <div class = "col-xs-4" id="xscore">X Score: 0
+      </div>
+      <div class = "col-xs-4" id="yscore">Y Score: 0
+      </div>
+      <div class = "col-xs-4" id="reset">Reset Score
+      </div>
+    </div>
+  </div>
+
 
   <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="js/ttt.js" type="text/javascript"></script>
   <script src="js/ttt_app.js" type="text/javascript"></script>
 
