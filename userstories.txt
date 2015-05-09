@@ -1,0 +1,23 @@
+User Stories
+Code flow
+
+User Stories:
+
+1.user looks at a webpage with a battleship board on it
+  -done
+2.user places pieces on their pieceboard and they show up
+  -in progress, priority 1 diff:
+3.user clicks enter to start game
+  -priority 2. diff 2
+4. user clicks spaces to guess
+.
+.
+.
+
+
+code flow:
+object battleship:{}
+inside will be objects for each board
+  setting up each board
+objects for play
+objects for winning
