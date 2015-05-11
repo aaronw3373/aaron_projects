@@ -6,7 +6,7 @@ function turn(){
   return user;
 }
 
-  var winner;
+  var winner = undefined;
   var singleX = [];
   var sumsX = [];
   var singleO = [];

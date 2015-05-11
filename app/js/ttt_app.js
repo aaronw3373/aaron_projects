@@ -1,7 +1,7 @@
 $(document).ready(function(){
   $('.box').on('click', function(event){
+    var local = '#' + (event.target.id);
     if(!winner){
-      var local = '#' + (event.target.id);
       if(!$(local).html()){
         turn();
         $(local).html(user?"X":"O");
@@ -17,24 +17,27 @@ $(document).ready(function(){
         }
       }
     }
-  });
-  $('#5').on('click', function(event){
-    if(winner){
-      console.log("New Game");
-      for (var i = 1; i < 10; i++) {
-        var reset = '#' + (i);
-        $(reset).html('');
-      };
-      $('#5').css('font-size','10em')
-      user = 0;
-      winner = undefined;
-      singleX = [];
-      sumsX = [];
-      singleO = [];
-      sumsO = [];
-      count = 0;
+    else if(winner !== undefined){
+      if (local==="#5"){
+        console.log("New Game");
+        for (var i = 1; i < 10; i++) {
+          var reset = '#' + (i);
+          $(reset).html('');
+        };
+        $(local).css('font-size','10em')
+        user = 0;
+        winner = undefined;
+        singleX = [];
+        sumsX = [];
+        singleO = [];
+        sumsO = [];
+        count = 0;
+      }
     }
   });
+
+
+
   $('#reset').on('click', function(event){
     console.log("Reset");
     for (var i = 1; i < 10; i++) {
