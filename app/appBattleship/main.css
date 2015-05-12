@@ -10,7 +10,6 @@ header{
   border-bottom: 0px;
   border-top-right-radius: 10px;
   border-top-left-radius:  10px;
-  min-width: 600px;
 }
 
 #logo{
@@ -25,7 +24,6 @@ header h2{
 }
 #main{
   width: 100%;
-  min-width: 600px;
   height: 740px;
 }
 #chat{
@@ -36,6 +34,11 @@ header h2{
   background-color: rgba(255,0,0,1);
   margin:0;
   border-bottom: 0px;
+}
+#messagesDiv{
+  width: calc(100% - 4px);
+  height: 90%;
+  background-color: red;
 }
 #score{
   width: calc(20% - 30px);
@@ -76,5 +79,24 @@ div{
 img{
   height: 100%;
   width: 100%;
+}
+@media (max-width: 600px){
+  #score{
+    display: none;
+  }
+  #chat{
+    display: none;
+  }
+  h2{
+    display: none;
+  }
+  #logo{
+    width: 90%;
+    margin-left: 5%;
+  }
+  #play{
+    width: 100%;
+  }
+
 }
 

@@ -11,5 +11,5 @@ there is a new game button and a reset scores button
 
 1.0 improve css funnctionality
 2.0 improve security my making functions and variables hidden
-3.0 make play between devices
+3.0 make play between devicesd
 
