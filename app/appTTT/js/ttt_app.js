@@ -9,8 +9,10 @@ $(document).ready(function(){
         if (win(local)){
           winner = users[user];
           console.log("the winner is: " + winner);
+          $('h1').html(winner + " WINS");
         }else if (tie()){
           console.log("twas a tie");
+          $('h1').html("Tie");
         }
       }
     }
@@ -23,6 +25,7 @@ $(document).ready(function(){
       var reset = '#' + (i);
       $(reset).html('');
     };
+    $('h1').html("Tic Tac Toe");
     user = 0;
     winner = undefined;
     singleX = [];
@@ -39,6 +42,7 @@ $(document).ready(function(){
       var reset = '#' + (i);
       $(reset).html('');
     };
+    $('h1').html("Tic Tac Toe");
     $('#xscore').html('X Score: 0');
     $('#yscore').html('Y Score: 0');
     $('#5').css('font-size','10em')

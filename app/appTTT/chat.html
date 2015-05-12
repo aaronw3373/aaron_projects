@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tic Tac Toe</title>
+  <link rel="shortcut icon" type="image/x-icon" href="styles/favicon.ico"/>
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="styles/ttt.css">
+
+  <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+ <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+</head>
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.html">Tic Tac Toe</a>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="chat.html">Chat</a></li>
+        </ul>
+    </div>
+  </nav>
+
+   <div id='messagesDiv'></div>
+    <input type='text' id='nameInput' placeholder='Name'>
+    <input type='text' id='messageInput' placeholder='Message'>
+    <button type="text" id="clear">Clear Chat</button>
+
+  <script>
+    var dataRef = new Firebase('https://tick-tack-toe.firebaseio.com');
+    $('#messageInput').keypress(function (e) {
+      if (e.keyCode == 13) {
+        var name = $('#nameInput').val();
+        var text = $('#messageInput').val();
+        dataRef.push({name: name, text: text});
+        $('#messageInput').val('');
+      }
+    });
+    dataRef.on('child_added', function(snapshot) {
+      var message = snapshot.val();
+      displayChatMessage(message.name, message.text);
+    });
+    function displayChatMessage(name, text) {
+      $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
+      $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+    };
+    $('#clear').on('click',function(){
+      dataRef.set(null);
+      $('#messagesDiv').html('');
+    });
+  </script>
+
+
+
+</body>
+</html>

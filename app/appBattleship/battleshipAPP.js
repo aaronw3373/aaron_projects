@@ -12,6 +12,7 @@ $(document).ready(function(){
   //and keys
   var location;
   var key;
+  var local;
 
   //when clicking on piece which is the id for piece board
   //the bottom board do this
@@ -40,6 +41,14 @@ $(document).ready(function(){
         };
       }
       battle.colorChanger();
+    }
+  });
+
+  $('#guess').click(function(event) {
+    if(battle.piecesSet === true){
+      local = event.target.id;
+      console.log("You clicked: " + event.target.id);
+      Battleship.Play.userGuess(local);
     }
   });
 

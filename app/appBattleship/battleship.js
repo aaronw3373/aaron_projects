@@ -152,8 +152,16 @@ Battleship.Setup = (function(){
     for (var row = 0; row < 10; row++) {
       for (var column = 0; column < 10; column++) {
         if (p1.pieceBoard[row][column]=== '3'){
-          var foobar = "#";
-          console.log(letters[row]);
+          var foobar = "#piece #";
+          foobar += (letters[row] + column);
+          $(foobar).css('background-color', '#FF0000');
+        }
+      }
+    }
+    for (var row = 0; row < 10; row++) {
+      for (var column = 0; column < 10; column++) {
+        if (p2.pieceBoard[row][column]=== '3'){
+          var foobar = "#piece #";
           foobar += (letters[row] + column);
           $(foobar).css('background-color', '#FF0000');
         }
@@ -171,6 +179,71 @@ Battleship.Setup = (function(){
   }
 
 })();
+
+Battleship.Play = (function(){
+
+    //array is used to translate user input of letters into numbers
+  var letters = ['a','b','c','d','e','f','g','h','i','j'];
+  var numbers = ['0','1','2','3','4','5','6','7','8','9']
+  //function takes user guess and turns it into numbers
+  //then tests the guess and checks against oponent
+  // and changes boards accordingly
+  //guess is lowercase letter followed by number (0-9)
+  var turns = 0;
+
+
+
+  function userGuess(guess){
+    var gboard;
+    var pboard;
+    (function(){
+      if (turns % 2 === 0){
+        gboard = Battleship.Setup.p1.guessBoard;
+        pboard = Battleship.Setup.p2.pieceboard;
+        console.log("player 1 guessing...");
+      } else if(turns % 2 === 1){
+        gboard = Battleship.Setup.p2.guessBoard;
+        pboard = Battleship.Setup.p1.pieceBoard;
+        console.log(" payer 2 guessinng...");
+      } else {
+        console.log("shitter");
+      }
+    })();
+
+    var row = letters.indexOf(guess.charAt(0));
+    var column = numbers.indexOf(guess.charAt(1));
+    console.log("guess in numeric: " + row + " : " + column);
+    console.log(pboard[row]);
+    if (pboard[row][column]===' '){
+      pboard[row][column] = 'O';
+      gboard[row][column] = 'O';
+      console.log(" You,ve missed");
+      turns++;
+    }
+    else if (pboard[row][column]==='O' || pboard[row][column]==='X'){
+      console.log(" You've already guessed here");
+      console.log(" Still your turn");
+    }
+
+    else{
+      pboard[row][column] = 'X';
+      gboard[row][column] = 'X';
+      console.log(" HIT");
+      turns++;
+    }
+
+  }
+
+  return {
+    userGuess
+  }
+
+
+
+})();
+
+
+
 
 
 /*

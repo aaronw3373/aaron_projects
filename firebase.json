@@ -1,0 +1,10 @@
+{
+  "firebase": "tick-tack-toe",
+  "public": "app/appTTT",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**",
+    "**/bower_components/**"
+  ]
+}
