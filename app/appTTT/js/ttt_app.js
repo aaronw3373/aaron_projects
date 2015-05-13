@@ -18,6 +18,11 @@ $(document).ready(function(){
     }
   });
 
+  $('#togleChat').on('click', function(){
+    console.log("chat click");
+    $('#chatbox').toggle(500,'swing');
+    $('#playbox').toggle(500,'swing');
+  });
 
   $('#new').on('click', function(event){
     console.log("New Game");
