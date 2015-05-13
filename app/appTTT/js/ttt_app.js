@@ -1,25 +1,19 @@
-
+var local;
 $(document).ready(function(){
+
   $('.box').on('click', function(event){
     if(!winner){
-      var local = '#' + (event.target.id);
+      local = '#' + (event.target.id);
       if(!$(local).html()){
-        turn();
-        $(local).html(user?"X":"O");
-        if (win(local)){
-          winner = users[user];
-          console.log("the winner is: " + winner);
-          $('h1').html(winner + " WINS");
-        }else if (tie()){
-          console.log("twas a tie");
-          $('h1').html("Tie");
-        }
+
+        board[(event.target.id)-1]=(users[user])
+        boardRef.set({board:board});
+        playerRef.set({local:local});
       }
     }
   });
 
   $('#togleChat').on('click', function(){
-    console.log("chat click");
     $('#chatbox').toggle(500,'swing');
     $('#playbox').toggle(500,'swing');
   });
@@ -31,6 +25,8 @@ $(document).ready(function(){
       $(reset).html('');
     };
     $('h1').html("Tic Tac Toe");
+    board = ["","","","","","","","",""];
+    boardRef.set({board:board});
     user = 0;
     winner = undefined;
     singleX = [];
@@ -49,8 +45,9 @@ $(document).ready(function(){
     };
     $('h1').html("Tic Tac Toe");
     $('#xscore').html('X Score: 0');
-    $('#yscore').html('Y Score: 0');
-    $('#5').css('font-size','10em')
+    $('#oscore').html('O Score: 0');
+    board = ["","","","","","","","",""];
+    boardRef.set({board:board});
     user = 0;
     winner = undefined;
     singleX = [];

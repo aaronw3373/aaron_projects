@@ -7,9 +7,9 @@ I used some bootstrap grid to make resizing the screen a little better
 But still more to make look good in the mobile platform
 Scores are displayed
 there is a new game button and a reset scores button
-
+deployed on firebase
+has a decent chat
 
 1.0 improve css funnctionality
-2.0 improve security my making functions and variables hidden
 3.0 make play between devicesd
 

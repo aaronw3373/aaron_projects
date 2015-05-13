@@ -1,24 +1,29 @@
 
-  var user = 0;
-  var users = ["O","X"];
+
+  var board = ["","","","","","","","",""];
+
+
+   var user = 0;
+   var users = ["X","O"];
 
 function turn(){
+  debugger;
   user = 1-user;
   return user;
 }
 
-  var winner = undefined;
+  var winner;
   var singleX = [];
   var sumsX = [];
   var singleO = [];
   var sumsO = [];
   var xscore = 0;
-  var yscore = 0;
+  var oscore = 0;
 
 
 function win(local){
-  local = parseInt(local.charAt(1));
-  if (user){
+  var local = parseInt(local.local.charAt(1));
+  if (users[user]==="X"){
     for (var i = 0; i < sumsX.length; i++) {
       if (sumsX[i] + local === 15){
         xscore++;
@@ -30,13 +35,11 @@ function win(local){
       sumsX.push(singleX[j]+local);
     }
     singleX.push(local);
-    console.log("singleX: " + singleX);
-    console.log("sumsX: " + sumsX);
-  } else {
+  } else if(users[user]==="O"){
       for (var k = 0; k < sumsO.length; k++) {
         if (sumsO[k] + local === 15){
-          yscore++;
-          $('#yscore').html('Y Score: ' + yscore);
+          oscore++;
+          $('#oscore').html('O Score: ' + oscore);
           return true;
         }
       }
@@ -44,12 +47,33 @@ function win(local){
         sumsO.push(singleO[l]+local);
       }
       singleO.push(local);
-      console.log("singleO: " + singleO);
-      console.log("sumsO: " + sumsO);
     }
 }
+/*
+var winsss = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 
+function winnn(space){
+  console.log("checking");
+  for(var key in winss){
+    if( board[key[0]]===board[key[1]] && board[key[1]]===board[key[2]] ){
+      winner = true;
+      console.log("winner: " + board[key[0]]);
+      if (board[key[0]]==='X'){
+        xscore++;
+        $('#xscore').html('X Score: ' + xscore);
+      }else if (board[key[0]]){
+        xscore++;
+        $('#xscore').html('X Score: ' + xscore);
+      }
+      return true;
 
+    }
+    else{
+      console.log("shizzz");
+    }
+  }
+}
+*/
 
 var count = 0;
 
@@ -58,6 +82,5 @@ function tie(){
     winner = "tie";
     return true;
   }
-  console.log(count);
   count += 1;
 }
