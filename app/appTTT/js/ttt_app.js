@@ -5,13 +5,41 @@ $(document).ready(function(){
     $('#playbox').toggle(500,'swing');
   });
 
+  //chat calls
+  var messageRef = new Firebase('https://tick-tack-toe.firebaseio.com/message');
+  function displayChatMessage(name, text) {
+      $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
+      $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+  }
+  $('#messageInput').keypress(function (e) {
+    if (e.keyCode == 13) {
+      var name = $('#nameInput').val();
+      var text = $('#messageInput').val();
+      messageRef.push({name: name, text: text});
+      $('#messageInput').val('');
+    }
+  });
+  messageRef.on('child_added', function(snapshot) {
+    var message = snapshot.val();
+    displayChatMessage(message.name, message.text);
+  });
+  $('#clear').on('click',function(){
+    messageRef.set(null);
+    $('#messagesDiv').html('');
+  });
+  //end chat calls
+
   //choose play type
   $('#login').on('click', function(event){
     $('#login').toggle(500, 'swing');
-    $('#playbox').toggle(500,'swing');
+    $('#playbox').toggle(500,'swing')
+
+
 
     //start play over network;
     if (event.target.id=== 'network'){
+
+      $('#foot').show(500, 'swing');
 
       function win(current){
         current = parseInt(current.charAt(1));
@@ -49,6 +77,7 @@ $(document).ready(function(){
       function newGame(){
         $('h1').html("Tic Tac Toe");
         board = ["","","","","","","","",""];
+        winner = undefined;
         disable = false;
         singleX = [];
         sumsX = [];
@@ -66,11 +95,6 @@ $(document).ready(function(){
         newGame();
       }
 
-      function displayChatMessage(name, text) {
-          $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
-          $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
-      }
-
       function displayBoard(setter){
         for (var i = 0; i < setter.length; i++) {
           board[i] = setter[i];
@@ -82,7 +106,6 @@ $(document).ready(function(){
 
 
       var local;
-      var messageRef = new Firebase('https://tick-tack-toe.firebaseio.com/message');
       var gameRef = new Firebase('https://tick-tack-toe.firebaseio.com/game');
       var gameAuth;
       var player;
@@ -97,7 +120,6 @@ $(document).ready(function(){
       var count = 0;
       var disable = false;
 
-      $(document).ready(function(){
         gameRef.set({board:board, player:"X", resett:true});
 
         var otherPlayer = function(player) {
@@ -196,109 +218,93 @@ $(document).ready(function(){
 
         //reset board keep scores
         $('#new').on('click', function(){
+          board = ["","","","","","","","",""];
           gameRef.set({board:board, player:"X", newGame:true});
         });
 
         //reset scores and board
         $('#reset').on('click', function(){
+          board = ["","","","","","","","",""];
           gameRef.set({board:board, player:"X", resett:true});
         });
 
-        //chat calls
-        $('#messageInput').keypress(function (e) {
-          if (e.keyCode == 13) {
-            var name = $('#nameInput').val();
-            var text = $('#messageInput').val();
-            messageRef.push({name: name, text: text});
-            $('#messageInput').val('');
-          }
-        });
-        messageRef.on('child_added', function(snapshot) {
-          var message = snapshot.val();
-          displayChatMessage(message.name, message.text);
-        });
-        $('#clear').on('click',function(){
-          messageRef.set(null);
-          $('#messagesDiv').html('');
-        });
 
 
   //end play over Network
-      });
+    }
 
   //start play locally
-    }else if(event.target.id=== 'local'){
-        var user = 0;
-        var users = ["O","X"];
-        var count = 0;
-        var winner = undefined;
-        var singleX = [];
-        var sumsX = [];
-        var singleO = [];
-        var sumsO = [];
-        var xscore = 0;
-        var oscore = 0;
+    else if(event.target.id=== 'local'){
+      $('#lfoot').show(500, 'swing');
+        var luser = 0;
+        var lusers = ["O","X"];
+        var lcount = 0;
+        var lwinner = undefined;
+        var lsingleX = [];
+        var lsumsX = [];
+        var lsingleO = [];
+        var lsumsO = [];
+        var lxscore = 0;
+        var loscore = 0;
 
       function turn(){
-        user = 1-user;
-        return user;
+        luser = 1-luser;
+        return luser;
       }
 
-      function win(local){
+      function wine(local){
         local = parseInt(local.charAt(1));
-        if (user){
-          for (var i = 0; i < sumsX.length; i++) {
-            if (sumsX[i] + local === 15){
-              xscore++;
-              $('#xscore').html('X Score: ' + xscore);
+        if (luser){
+          for (var i = 0; i < lsumsX.length; i++) {
+            if (lsumsX[i] + local === 15){
+              lxscore++;
+              $('#lxscore').html('X Score: ' + lxscore);
               return true;
             }
           }
-          for (var j = 0; j < singleX.length; j++) {
-            sumsX.push(singleX[j]+local);
+          for (var j = 0; j < lsingleX.length; j++) {
+            lsumsX.push(lsingleX[j]+local);
           }
-          singleX.push(local);
-          console.log("singleX: " + singleX);
-          console.log("sumsX: " + sumsX);
+          lsingleX.push(local);
+          console.log("singleX: " + lsingleX);
+          console.log("sumsX: " + lsumsX);
         } else {
-            for (var k = 0; k < sumsO.length; k++) {
-              if (sumsO[k] + local === 15){
-                oscore++;
-                $('#oscore').html('O Score: ' + oscore);
+            for (var k = 0; k < lsumsO.length; k++) {
+              if (lsumsO[k] + local === 15){
+                loscore++;
+                $('#loscore').html('O Score: ' + loscore);
                 return true;
               }
             }
-            for (var l = 0; l < singleO.length; l++) {
-              sumsO.push(singleO[l]+local);
+            for (var l = 0; l < lsingleO.length; l++) {
+              lsumsO.push(lsingleO[l]+local);
             }
-            singleO.push(local);
-            console.log("singleO: " + singleO);
-            console.log("sumsO: " + sumsO);
+            lsingleO.push(local);
+            console.log("singleO: " + lsingleO);
+            console.log("sumsO: " + lsumsO);
           }
       }
 
-      function tie(){
+      function ties(){
         if (count === 8){
-          winner = "tie";
+          lwinner = "tie";
           return true;
         }
-        console.log(count);
-        count += 1;
+        console.log(lcount);
+        lcount++;
       }
 
-
-      $(document).ready(function(){
         $('.box').on('click', function(event){
-          if(!winner){
+          if(!lwinner){
             var local = '#' + (event.target.id);
             if(!$(local).html()){
               turn();
-              $(local).html(user?"X":"O");
-              if (win(local)){
-                winner = users[user];
-                console.log("the winner is: " + winner);
-                $('h1').html(winner + " WINS");
-              }else if (tie()){
+              $(local).html(luser?"X":"O");
+              if (wine(local)){
+                lwinner = lusers[luser];
+                console.log("the winner is: " + lwinner);
+                $('h1').html(lwinner + " WINS");
+              }else if (ties()){
                 console.log("twas a tie");
                 $('h1').html("Tie");
               }
@@ -307,45 +313,44 @@ $(document).ready(function(){
         });
 
 
-        $('#new').on('click', function(event){
+        $('#lnew').on('click', function(event){
           console.log("New Game");
           for (var i = 1; i < 10; i++) {
             var reset = '#' + (i);
             $(reset).html('');
           };
           $('h1').html("Tic Tac Toe");
-          user = 0;
-          winner = undefined;
-          singleX = [];
-          sumsX = [];
-          singleO = [];
-          sumsO = [];
-          count = 0;
+          luser = 0;
+          lwinner = undefined;
+          lsingleX = [];
+          lsumsX = [];
+          lsingleO = [];
+          lsumsO = [];
+          lcount = 0;
         });
 
 
-        $('#reset').on('click', function(event){
+        $('#lreset').on('click', function(event){
           console.log("Reset");
           for (var i = 1; i < 10; i++) {
             var reset = '#' + (i);
             $(reset).html('');
           };
           $('h1').html("Tic Tac Toe");
-          $('#xscore').html('X Score: 0');
-          $('#oscore').html('O Score: 0');
-          $('#5').css('font-size','10em')
-          user = 0;
-          winner = undefined;
-          singleX = [];
-          sumsX = [];
-          singleO = [];
-          sumsO = [];
-          count = 0;
-          xscore = 0;
-          oscore = 0
+          $('#lxscore').html('X Score: 0');
+          $('#loscore').html('O Score: 0');
+          luser = 0;
+          lwinner = undefined;
+          lsingleX = [];
+          lsumsX = [];
+          lsingleO = [];
+          lsumsO = [];
+          lcount = 0;
+          lxscore = 0;
+          loscore = 0
         });
 
-      })
+
 
 
 
