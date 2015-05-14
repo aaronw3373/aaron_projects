@@ -2,7 +2,6 @@
   var messageRef = new Firebase('https://tick-tack-toe.firebaseio.com/message');
   var boardRef = new Firebase('https://tick-tack-toe.firebaseio.com/boards');
   var gameRef = new Firebase('https://tick-tack-toe.firebaseio.com/game');
-  var playerRef = new Firebase('https://tick-tack-toe.firebaseio.com/game/player');
   var gameAuth;
   var player;
   var board = ["","","","","","","","",""];
@@ -19,6 +18,7 @@
 $(document).ready(function(){
   board = ["","","","","","","","",""];
   boardRef.set({board:board});
+  resett();
 
 
 
@@ -43,35 +43,24 @@ $(document).ready(function(){
       local = '#' + (event.target.id);
       if(!$(local).html()){
 
-
-
         board[(event.target.id)-1]=(player);
         boardRef.set({board:board});
-
 
         var firebaseData = {
           player: otherPlayer(player),
           waitingPlayer: gameAuth.uid, local:local
         };
 
-
-
         if (win(local)){
-          var winner = player;
+          winner = player;
           firebaseData.winner = winner;
-          console.log("the winner is: " + winner);
-          $('h1').html(winner + " WINS");
         }else if (tie()){
             firebaseData.winner = winner;
-            console.log("twas a tie");
-            $('h1').html("Tie");
           }
 
         gameRef.set(firebaseData);
 
         disable = true;
-
-
 
       }
 
@@ -88,7 +77,16 @@ $(document).ready(function(){
       } else {
         player = snap.player;
       }
-      //winner
+      if (snap.winner){
+        disable = true;
+        if (snap.winner === "tie"){
+          console.log("twas a tie");
+            $('h1').html("Tie");
+          }else{
+          console.log("the winner is: " + snap.winner);
+          $('h1').html(snap.winner + " WINS");
+        }
+      }
   });
 
 
@@ -96,7 +94,9 @@ $(document).ready(function(){
   $('#new').on('click', function(event){
     board = ["","","","","","","","",""];
     boardRef.set({board:board});
+
     newGame();
+
   });
 
   //reset scores and board

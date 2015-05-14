@@ -38,9 +38,8 @@ function tie(){
 function newGame(){
   console.log("New Game");
   $('h1').html("Tic Tac Toe");
+  gameRef.set({player:"X"})
   disable = false
-  player = undefined;
-  winner = undefined;
   singleX = [];
   sumsX = [];
   singleO = [];
@@ -53,7 +52,6 @@ function resett(){
   console.log("Reset");
   $('#xscore').html('X Score: 0');
   $('#oscore').html('O Score: 0');
-  gameAuth = undefined;
   xscore = 0;
   yscore = 0
 };
