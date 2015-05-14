@@ -3,8 +3,6 @@ function win(current){
   if (player==="X"){
     for (var i = 0; i < sumsX.length; i++) {
       if (sumsX[i] + current === 15){
-        xscore++;
-        $('#xscore').html('X Score: ' + xscore);
         return true;
       }
     }
@@ -15,8 +13,6 @@ function win(current){
   } else if(player==="O"){
       for (var k = 0; k < sumsO.length; k++) {
         if (sumsO[k] + current === 15){
-          oscore++;
-          $('#oscore').html('O Score: ' + oscore);
           return true;
         }
       }
@@ -36,24 +32,24 @@ function tie(){
 };
 
 function newGame(){
-  console.log("New Game");
   $('h1').html("Tic Tac Toe");
-  gameRef.set({player:"X"})
+  board = ["","","","","","","","",""];
   disable = false
   singleX = [];
   sumsX = [];
   singleO = [];
   sumsO = [];
   count = 0;
+  gameRef.set({newGame:true,board:board, player:"X"})
 };
 
 function resett(){
-  newGame();
-  console.log("Reset");
-  $('#xscore').html('X Score: 0');
-  $('#oscore').html('O Score: 0');
+  gameRef.set({resett:true})
   xscore = 0;
   yscore = 0
+  $('#xscore').html('X Score: 0');
+  $('#oscore').html('O Score: 0');
+  newGame();
 };
 
 function displayChatMessage(name, text) {
@@ -62,8 +58,8 @@ function displayChatMessage(name, text) {
 };
 
 function displayBoard(setter){
-  for (var i = 0; i < setter.board.length; i++) {
-    board[i] = setter.board[i]
+  for (var i = 0; i < setter.length; i++) {
+    board[i] = setter[i]
     var spot = '#' + (i+1)
     $(spot).html(board[i]);
   };
