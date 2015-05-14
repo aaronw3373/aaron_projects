@@ -38,7 +38,7 @@ function tie(){
 function newGame(){
   console.log("New Game");
   $('h1').html("Tic Tac Toe");
-  $('.box').prop('disabled', true);
+  disable = false
   player = undefined;
   winner = undefined;
   singleX = [];
@@ -49,19 +49,11 @@ function newGame(){
 };
 
 function resett(){
+  newGame();
   console.log("Reset");
-  $('h1').html("Tic Tac Toe");
   $('#xscore').html('X Score: 0');
   $('#oscore').html('O Score: 0');
-  $('.box').prop('disabled', true);
-  boardRef.set({board:board});
-  player = undefined;
-  winner = undefined;
-  singleX = [];
-  sumsX = [];
-  singleO = [];
-  sumsO = [];
-  count = 0;
+  gameAuth = undefined;
   xscore = 0;
   yscore = 0
 };
