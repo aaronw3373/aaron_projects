@@ -1,81 +1,31 @@
-
-
-  var board = ["","","","","","","","",""];
-
-
-   var user = 0;
-   var users = ["X","O"];
-
-function turn(){
-  debugger;
-  user = 1-user;
-  return user;
-}
-
-  var winner;
-  var singleX = [];
-  var sumsX = [];
-  var singleO = [];
-  var sumsO = [];
-  var xscore = 0;
-  var oscore = 0;
-
-
-function win(local){
-  var local = parseInt(local.local.charAt(1));
-  if (users[user]==="X"){
+function win(current){
+  var current = parseInt(current.charAt(1));
+  if (player==="X"){
     for (var i = 0; i < sumsX.length; i++) {
-      if (sumsX[i] + local === 15){
+      if (sumsX[i] + current === 15){
         xscore++;
         $('#xscore').html('X Score: ' + xscore);
         return true;
       }
     }
     for (var j = 0; j < singleX.length; j++) {
-      sumsX.push(singleX[j]+local);
+      sumsX.push(singleX[j]+current);
     }
-    singleX.push(local);
-  } else if(users[user]==="O"){
+    singleX.push(current);
+  } else if(player==="O"){
       for (var k = 0; k < sumsO.length; k++) {
-        if (sumsO[k] + local === 15){
+        if (sumsO[k] + current === 15){
           oscore++;
           $('#oscore').html('O Score: ' + oscore);
           return true;
         }
       }
       for (var l = 0; l < singleO.length; l++) {
-        sumsO.push(singleO[l]+local);
+        sumsO.push(singleO[l]+current);
       }
-      singleO.push(local);
+      singleO.push(current);
     }
-}
-/*
-var winsss = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
-
-function winnn(space){
-  console.log("checking");
-  for(var key in winss){
-    if( board[key[0]]===board[key[1]] && board[key[1]]===board[key[2]] ){
-      winner = true;
-      console.log("winner: " + board[key[0]]);
-      if (board[key[0]]==='X'){
-        xscore++;
-        $('#xscore').html('X Score: ' + xscore);
-      }else if (board[key[0]]){
-        xscore++;
-        $('#xscore').html('X Score: ' + xscore);
-      }
-      return true;
-
-    }
-    else{
-      console.log("shizzz");
-    }
-  }
-}
-*/
-
-var count = 0;
+};
 
 function tie(){
   if (count === 8){
@@ -83,4 +33,49 @@ function tie(){
     return true;
   }
   count += 1;
+};
+
+function newGame(){
+  console.log("New Game");
+  $('h1').html("Tic Tac Toe");
+  $('.box').prop('disabled', true);
+  player = undefined;
+  winner = undefined;
+  singleX = [];
+  sumsX = [];
+  singleO = [];
+  sumsO = [];
+  count = 0;
+};
+
+function resett(){
+  console.log("Reset");
+  $('h1').html("Tic Tac Toe");
+  $('#xscore').html('X Score: 0');
+  $('#oscore').html('O Score: 0');
+  $('.box').prop('disabled', true);
+  boardRef.set({board:board});
+  player = undefined;
+  winner = undefined;
+  singleX = [];
+  sumsX = [];
+  singleO = [];
+  sumsO = [];
+  count = 0;
+  xscore = 0;
+  yscore = 0
+};
+
+function displayChatMessage(name, text) {
+    $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#messagesDiv'));
+    $('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+};
+
+function displayBoard(setter){
+  for (var i = 0; i < setter.board.length; i++) {
+    board[i] = setter.board[i]
+    var spot = '#' + (i+1)
+    $(spot).html(board[i]);
+  };
 }
+
