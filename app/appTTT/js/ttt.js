@@ -40,11 +40,10 @@ function newGame(){
   singleO = [];
   sumsO = [];
   count = 0;
-  gameRef.set({newGame:true,board:board, player:"X"})
+  gameRef.set({board:board, player:"X"})
 };
 
 function resett(){
-  gameRef.set({resett:true})
   xscore = 0;
   yscore = 0
   $('#xscore').html('X Score: 0');

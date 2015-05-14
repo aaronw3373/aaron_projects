@@ -15,7 +15,7 @@
   var disable = false;
 
 $(document).ready(function(){
-  resett();
+  gameRef.set({board:board, player:"X", resett:true});
 
 
 
@@ -33,6 +33,7 @@ $(document).ready(function(){
       }
     });
   }
+
 
   //click function
   $('.box').on('click', function(event){
@@ -74,52 +75,52 @@ $(document).ready(function(){
 
    //On load, set up event handling on the object at "gameRef"
   gameRef.on('value', function(snapshot) {
-      var snap = snapshot.val();;
-      displayBoard(snap.board);
-      if (snap.newGame){
-        newGame();
-      }
-      if (snap.resett){
-        resett();
-      }
+    var snap = snapshot.val();
+    displayBoard(snap.board);
 
-      disable = false;
+    if (snap.newGame){
+      newGame();
+    }
+    if (snap.resett){
+      resett();
+    }
 
-      if (gameAuth.uid === snap.waitingPlayer) {
-        player = otherPlayer(snap.player);
-        disable = true;
-      } else {
-        player = snap.player;
-      }
+    disable = false;
 
-      if (snap.winner){
-        disable = true;
-        if (snap.winner === "tie"){
-          console.log("twas a tie");
-            $('h1').html("Tie");
-          }else{
+    if (gameAuth.uid === snap.waitingPlayer) {
+      player = otherPlayer(snap.player);
+      disable = true;
+    } else {
+      player = snap.player;
+    }
 
-
-            xscore = snap.xscore;
-            oscore = snap.oscore;
+    if (snap.winner){
+      disable = true;
+      if (snap.winner === "tie"){
+        console.log("twas a tie");
+          $('h1').html("Tie");
+        }else{
+          xscore = snap.xscore;
+          oscore = snap.oscore;
 
           $('#oscore').html('O Score: ' + oscore);
           $('#xscore').html('X Score: ' + xscore);
           console.log("the winner is: " + snap.winner);
           $('h1').html(snap.winner + " WINS");
-        }
-      }
+          }
+    }
+
   });
 
 
   //reset board keep scores
-  $('#new').on('click', function(event){
-    newGame();
+  $('#new').on('click', function(){
+    gameRef.set({board:board, player:"X", newGame:true});
   });
 
   //reset scores and board
   $('#reset').on('click', function(){
-    resett();
+    gameRef.set({board:board, player:"X", resett:true});
   });
 
   //show chat
