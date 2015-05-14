@@ -13,6 +13,7 @@
 #messagesDiv{
   padding-top:10px;
 }
+
 .box{
   height: 150px;
   width: 100%;
@@ -21,8 +22,24 @@
   font-size: 8em;
   text-align: center;
   border-radius: 20px;
-
 }
+#local{
+  background-color: #00aa00;
+  height:100%;
+  border-radius: 20px;
+  font-size: 8em;
+  text-align: center;
+  margin-top: 20px;
+}
+#network{
+  background-color: #00aa00;
+  height:100%;
+  border-radius: 20px;
+  font-size: 8em;
+  text-align: center;
+  margin-top:20px;
+}
+
 #foot{
   background-color: #00aa00;
   font-size: 2em;
