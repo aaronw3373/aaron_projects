@@ -73,8 +73,8 @@ function canWin(){
     if (Cboard[i-1]===""){
       if (winer((i),comp,computer)){
         console.log("compWin " + (i));
-        Cboard[i]="O"
-        var local = '#' + (i);
+        Cboard[i-1]="O"
+        var local = '#' + i;
         $(local).html(computer);
         return true;
       }
@@ -85,7 +85,7 @@ function canBlock(){
   console.log('canBlock ');
   for (var i = 1; i < 10; i++) {
     if (Cboard[i-1]===""){
-      if (winer(i,play,computer)){
+      if (winer((i),play,computer)){
         Cboard[i-1]="O"
         var local = '#' + i;
         $(local).html(computer);
@@ -109,9 +109,32 @@ function canMiddle(){
       compPairs.push(Number(compSingle[i])+5);
     }
     compSingle.push(5);
+    console.log(compPairs);
+    console.log(compSingle);
     return true;
   }
 }
+
+function canSmart(){
+  console.log("canSmart")
+  var length = playSingle.length;
+  if (playSingle[length-1]+playSingle[length-2]===10){
+    for (key in Cboard){
+      if ((key%2 === 0) && (Cboard[key]==="")){
+        Cboard[key] = "O";
+        var local = '#' + (Number(key)+1);
+        $(local).html(computer);
+        for (var i = 0; i < compSingle.length ;i++) {
+          compPairs.push(Number(compSingle[i])+(Number(key)+1));
+        }
+        compSingle.push(Number(key)+1);
+        return true;
+      }
+    }
+  }
+}
+
+
 function mustRandom(){
   console.log('mustRandom ');
   function randomIntFromInterval(min,max){
@@ -160,6 +183,8 @@ $(document).ready(function(){
           else if(canBlock()){
           }
           else if(canMiddle()){
+          }
+          else if (canSmart()){
           }
           else {
             mustRandom();

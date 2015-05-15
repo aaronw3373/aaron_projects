@@ -15,7 +15,7 @@ I saved that code in a separate branch and began working on a networked game usi
 I added back in the option to play locally or someone from a different location.
 
 I then used the magic square win function to play against the computer
-The computer checks using magic squares if there is a move it can make to win, if not a move to make to block the player from winning and if not it goes in the middle and if none of those then iit goes randomly
+The computer checks using magic squares if there is a move it can make to win, if not a move to make to block the player from winning and if not it goes in the middle then if the player goes in oposite corners the computer goes in the a middle side somewhere and if none of those then iit goes randomly
 
 The first thing to do next is to encapsulate everything.
 Then I'll work on allowing multiple networked games to happen currentlly only one game at a time is possible.
