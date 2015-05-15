@@ -394,7 +394,7 @@ $(document).ready(function(){
           console.log("bad who input");
         }
 
-        function tester(){
+        var tester = function(){
           for (var i = 0; i < pair.length; i++) {
             if (Number(pair[i]) + Number(test) === 15){
               return true;
