@@ -498,6 +498,23 @@ $(document).ready(function(){
         }
       }
 
+      function canSmart2(){
+        console.log("canSmart2")
+        var length = playSingle.length;
+        for (key in Cboard){
+          if ((key%2 === 1) && (Cboard[key]==="")){
+            Cboard[key] = "O";
+            var local = '#' + (Number(key)+1);
+            $(local).html(computer);
+            for (var i = 0; i < compSingle.length ;i++) {
+              compPairs.push(Number(compSingle[i])+(Number(key)+1));
+            }
+            compSingle.push(Number(key)+1);
+            return true;
+          }
+        }
+
+      }
 
       function mustRandom(){
         console.log('mustRandom ');
@@ -556,6 +573,8 @@ $(document).ready(function(){
                   else if(canMiddle()){
                   }
                   else if(canSmart()){
+                  }
+                  else if (canSmart2()){
                   }
                   else {
                     mustRandom();
