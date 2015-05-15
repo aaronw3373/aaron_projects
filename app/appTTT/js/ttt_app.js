@@ -357,7 +357,11 @@ $(document).ready(function(){
       //end play locally
     }
 
-
+    //
+    //
+    //
+    //
+    //
     //start local v computer
     else if(event.target.id=== 'compute'){
       $('#cfoot').show(500, 'swing');
@@ -539,8 +543,7 @@ $(document).ready(function(){
       }
 
 
-      //loop
-      //while (!victor){
+
         //click handler
       $(document).ready(function(){
 
