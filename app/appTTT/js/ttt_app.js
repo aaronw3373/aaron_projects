@@ -357,6 +357,8 @@ $(document).ready(function(){
       //end play locally
     }
 
+  //end play locally
+
     //
     //
     //
@@ -365,6 +367,10 @@ $(document).ready(function(){
     //start local v computer
     else if(event.target.id=== 'compute'){
       $('#cfoot').show(500, 'swing');
+
+
+
+
 
       var Cboard = ["","","","","","","","",""];
       var playSingle = [];
@@ -401,6 +407,7 @@ $(document).ready(function(){
             }
           }
         }
+
         if (turn === person){
           if(tester()){
             return true;
@@ -483,6 +490,10 @@ $(document).ready(function(){
         }
       }
 
+      function randomIntFromInterval(min,max){
+        return Math.floor(Math.random()*(max));
+      }
+
       function canSmart(){
         console.log("canSmart")
         var length = playSingle.length;
@@ -505,37 +516,37 @@ $(document).ready(function(){
       function canSmart2(){
         console.log("canSmart2")
         var length = playSingle.length;
+        var array = [];
         for (key in Cboard){
           if ((key%2 === 1) && (Cboard[key]==="")){
-            Cboard[key] = "O";
-            var local = '#' + (Number(key)+1);
-            $(local).html(computer);
-            for (var i = 0; i < compSingle.length ;i++) {
-              compPairs.push(Number(compSingle[i])+(Number(key)+1));
-            }
-            compSingle.push(Number(key)+1);
-            return true;
+            array.push(key)
           }
         }
-
+        if (array !== []){
+          var spot = randomIntFromInterval(0,(array.length))
+          Cboard[array[spot]] = "O";
+          var local = '#' + (Number(array[spot])+1);
+          $(local).html(computer);
+          for (var i = 0; i < compSingle.length ;i++) {
+            compPairs.push(Number(compSingle[i])+(Number(array[spot])+1));
+          }
+          compSingle.push(Number(array[spot])+1);
+          return true;
+        }
       }
 
       function mustRandom(){
         console.log('mustRandom ');
-        function randomIntFromInterval(min,max){
-            return Math.floor(Math.random()*(max));
-        }
         var emptySpace = [];
         for (key in Cboard){
           if (Cboard[key]===""){
             emptySpace.push(key);
           }
         }
-        var rando = randomIntFromInterval(0,(emptySpace.length-1))
+        var rando = randomIntFromInterval(0,(emptySpace.length))
         Cboard[emptySpace[rando]]="O";
         var local = '#' + (Number(emptySpace[rando])+1);
         $(local).html(computer);
-
         for (var i = 0; i < compSingle.length ;i++) {
           compPairs.push( Number(compSingle[i]) + (Number(emptySpace[rando])+1) );
         }
