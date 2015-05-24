@@ -24,9 +24,6 @@ var results = [];
 
 
 function isBigPrime(n){
-  //var start = new Date(milliseconds);
-
-  // if (n>0){
     square = Math.sqrt(n);
     console.log("square root is: " + square);
     var results2 = primeGen(2, square);
@@ -41,16 +38,8 @@ function isBigPrime(n){
     };
     console.log(n + " is prime");
     return true;
-  //}
-
-  // else{
-  //   console.log(n + " is not prime")
-  //   return false;
-  // }
-  // var diff = (new Date(milliseconds)) - start;
-  // console.log("it took: " + diff + "ms");
 }
 
 
-isBigPrime(10000000000283);
+isBigPrime(100000000283);
 
