@@ -1,14 +1,33 @@
+body{
+  background-color: #2c3e50;
+  color:white;
+}
+.navbar{
+  background-color: #34495e;
+  border-radius: 0;
+  color:white;
+}
 #head{
   text-align: center;
-  font-size: 4em;
-  background-color: #00aa00;
-  border-radius: 20px;
+  background-color: #339933;
+  margin-right: 0px ;
+  margin-left: 0px;
+}
+
+#head h1{
+  font-size: 5em;
+  color:white;
+
+}
+#head a{
+  text-decoration: none;
 }
 #chatbox{
+  margin-left: 0;
+  margin-right: 0;
   margin-top: 20px;
   height: 490px;
-  background-color: #00aa00;
-  border-radius: 20px;
+  background-color: #339933;
 }
 #messagesDiv{
   padding-top:10px;
@@ -17,41 +36,24 @@
 .box{
   height: 150px;
   width: 100%;
-  background-color: green;
+  background-color: #339933;
   margin-top:20px;
   font-size: 8em;
   text-align: center;
-  border-radius: 20px;
 }
-#local{
-  background-color: #00aa00;
+#local, #network, #compute{
+  background-color: #339933;
   height:100%;
-  border-radius: 20px;
   font-size: 8em;
   text-align: center;
   margin-top: 20px;
-}
-#network{
-  background-color: #00aa00;
-  height:100%;
-  border-radius: 20px;
-  font-size: 8em;
-  text-align: center;
-  margin-top:20px;
-}
-#compute{
-  background-color: #00aa00;
-  height:100%;
-  border-radius: 20px;
-  font-size: 8em;
-  text-align: center;
-  margin-top:20px;
 }
 
 #foot, #lfoot, #cfoot{
-  background-color: #00aa00;
+  background-color: #339933;
   font-size: 2em;
   margin-top: 20px;
-  border-radius: 25px;
+  margin-left: 0;
+  margin-right: 0;
 }
 
