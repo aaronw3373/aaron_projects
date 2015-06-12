@@ -38,6 +38,7 @@ $(document).ready(function(){
 
     //start play over network;
     if (event.target.id=== 'network'){
+      return;
 
       $('#foot').show(500, 'swing');
 
